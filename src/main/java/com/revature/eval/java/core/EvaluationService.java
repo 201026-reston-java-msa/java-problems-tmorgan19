@@ -14,8 +14,11 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
-		
-		return "";
+		String reversed = "";
+		for (int i=string.length()-1; i>=0; i--) {
+			reversed = reversed + string.charAt(i);
+		}
+		return reversed;
 	}
 
 	/**
@@ -27,8 +30,21 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String acro = "";
+		char delimit = ' ';
+		char delimit2 = '-';
+		for (int i=0; i<phrase.length(); i++) {
+			if (i==0) {
+				acro = acro + phrase.charAt(i);
+			}
+			else {
+				if (phrase.charAt(i-1)==delimit || phrase.charAt(i-1)==delimit2) {
+					acro = acro + phrase.charAt(i);
+				}
+			}
+		}
+		acro = acro.toUpperCase();
+		return acro;
 	}
 
 	/**
