@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,18 +98,39 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			boolean val = false;
+			if (this.getSideOne()==this.getSideTwo() && this.getSideOne()==this.getSideThree()){
+				val = true;
+			}
+			return val;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			boolean val = false;
+			if (this.getSideOne()==this.getSideTwo()) {
+				val = true;
+			}
+			else if (this.getSideOne()==this.getSideThree()){
+				val = true;
+				}
+			else if (this.getSideTwo()==this.getSideThree()){
+				val = true;
+			}
+			return val;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			boolean val = true;
+			if (this.getSideOne()==this.getSideTwo()) {
+				val = false;
+			}
+			else if (this.getSideOne()==this.getSideThree()){
+				val = false;
+				}
+			else if (this.getSideTwo()==this.getSideThree()){
+				val = false;
+			}
+			return val;
 		}
 
 	}
@@ -129,8 +151,40 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		Map<Character, Integer> vals = new HashMap<Character, Integer>();
+
+		vals.put('a', 1);
+		vals.put('e', 1);
+		vals.put('i', 1);
+		vals.put('o', 1);
+		vals.put('u', 1);
+		vals.put('l', 1);
+		vals.put('n', 1);
+		vals.put('r', 1);
+		vals.put('s', 1);
+		vals.put('t', 1);
+		vals.put('d', 2);
+		vals.put('g', 2);
+		vals.put('b', 3);
+		vals.put('c', 3);
+		vals.put('m', 3);
+		vals.put('p', 3);
+		vals.put('f', 4);
+		vals.put('h', 4);
+		vals.put('v', 4);
+		vals.put('w', 4);
+		vals.put('y', 4);
+		vals.put('k', 5);
+		vals.put('j', 8);
+		vals.put('x', 8);
+		vals.put('q', 10);
+		vals.put('z', 10);
+
+		for (int i=0; i<string.length(); i++){
+			score = score + vals.get(string.toLowerCase().charAt(i));
+		}
+		return score;
 	}
 
 	/**
@@ -165,8 +219,21 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String num = "";
+		for (int i=0; i<string.length(); i++){
+			if (Character.isDigit(string.charAt(i))){
+				num = num + string.charAt(i);
+			}
+		}
+		if (num.length()!=10){
+			if (num.length()==11 && num.charAt(0)=='1'){
+				num = num.substring(1);
+			}
+			else{
+				throw new IllegalArgumentException();
+			}
+		}
+		return num;
 	}
 
 	/**
