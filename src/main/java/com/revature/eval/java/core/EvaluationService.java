@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -246,8 +247,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		Map<String, Integer> myMap = new HashMap<String, Integer>();
+		string = string.toLowerCase();
+		String regex = null;
+		if (string.contains(" ")){
+			regex=" ";
+		}else if (string.contains(",")){
+			regex=",";
+		}else if (string.contains(",\n")){
+			regex=",\n";
+		}
+		String[] words = string.split(regex);
+		for (int i = 0; i < words.length; i++){
+			if (myMap.containsKey(words[i])){
+				int newCount = myMap.get(words[i]).intValue() + 1;
+				myMap.remove(words[i]);
+				myMap.put(words[i], newCount);
+			} else{
+				myMap.put(words[i], 1);
+			}
+		}
+		// myMap.forEach((k, v) -> {
+		// 	System.out.println(k + ": " + v);
+		// });
+		return myMap;
 	}
 
 	/**
@@ -346,8 +369,28 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		int dig1 = input % 10;
+		int dig2 = input/10;
+		if (dig2 > 9){
+			dig2 = dig2 % 10;
+		}
+		int dig3 = input/100;
+		if (dig3>9){
+			dig3 = dig3 % 10;
+		}
+		int dig4 = input/1000;
+		int numdigits;
+		if (input > 999){
+			numdigits = 4;
+		}else if (input > 99){
+			numdigits = 3;
+		}else if (input >9){
+			numdigits = 2;
+		}else {
+			numdigits = 1;
+		}
+		int calc = (int) Math.pow(dig1, numdigits) + (int) Math.pow(dig2, numdigits) + (int) Math.pow(dig3, numdigits) + (int) Math.pow(dig4, numdigits);
+		return (calc == input);
 	}
 
 	/**
@@ -361,8 +404,16 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> factors = new ArrayList<>();
+
+		for (long p = 2; p<=l; p++){
+			if (l % p == 0){
+				l = l/p;
+				factors.add(p);
+				p--;
+			}
+		}
+		return factors;
 	}
 
 	/**

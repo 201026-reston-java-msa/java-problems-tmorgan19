@@ -6,7 +6,7 @@
 # *~
 # .git/info/exclude
 
-src/test/java/com/revature/eval/java/core/practice.java
+**/practice.java
 
 **/pull_request_template.md
 **/issue_template.md
